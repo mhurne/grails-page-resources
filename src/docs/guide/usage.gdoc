@@ -1,0 +1,48 @@
+h4. First, install the plugin by adding a dependency in @BuildConfig.groovy@:
+
+{code}
+plugins {
+   ...
+   runtime ':page-resources:0.1'
+}
+{code}
+
+or install with @install-plugin@:
+
+{code}
+grails install-plugin page-resources
+{code}
+
+h4. Creating page modules
+
+Next, you'll need to create some page modules.  Within @web-app/pages@, create a directory structure that parallels the
+path to a view.  For example, if you have a file @grails-app/views/user/view.gsp@, you would create directory
+@web-app/pages/user/view@.  Create any page-specific resources that you want the view to include in this directory.
+For example, if the page requires special styling you can add .css or .less files, or if the page requires special
+Javascript behavior you can add .js files.  For every such directory that contains files, a resource module will be
+automatically created, and the view will automatically require it.  In this example, the module would be named
+"pages_user_view" (the directory path with slashes replaced with underscores).  Files in the directory are included
+in the module in alphabetical order.
+
+h4. Default page dependencies
+
+You may have some JavaScript libraries that your page-specific scripts use.  A JavaScript framework such as jQuery
+would be a common example of this.  You need to tell the resources plugin about these dependencies, or they may be
+included in the wrong ordering, resulting in JavaScript errors.  These situations can often be resolved using a default
+page dependencies module.  If you
+[declare a resource module|http://grails-plugins.github.com/grails-resources/guide/3.%20Declaring%20resources.html]
+named @defaultPageDependencies@, the page modules will automatically list it as a dependency.  If you list all your
+commonly used libraries as dependencies in your @defaultPageDependencies@ module, you generally won't need to do any
+page-specific configuration for most views.  If you need to list dependencies not appropriate for the default page
+dependencies, please see the "Explicit page module definitions" section below.
+
+h4. Explicit page module definitions
+
+In some cases, you may need additional control over the contents of the resource module for a page.  Examples of this
+include when you need to vary from the default page dependencies, when you need to include additional resources in
+the page module, or when you need to specify special processing for particular resources in the module.  In these cases,
+simply
+[declare a resource module|http://grails-plugins.github.com/grails-resources/guide/3.%20Declaring%20resources.html]
+with the same name as would have been automatically created (pages_*PATH*_*VIEWNAME*).  The Page Resources plugin will
+use your definition for the module rather than automatically create one, and will still automatically require the module
+in the view.

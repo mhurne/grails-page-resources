@@ -1,0 +1,4 @@
+The Page Resources plugin provides the [Grails Resources plugin|http://grails.org/plugin/resources] with the ability to
+use convention over configuration to define "page modules", which allow having page-specific
+JavaScript/CSS/LESS resources.  This can drastically cut down on the number of resource modules that need to be
+configured explicitly.
