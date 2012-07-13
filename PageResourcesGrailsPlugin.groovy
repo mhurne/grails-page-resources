@@ -5,7 +5,9 @@ class PageResourcesGrailsPlugin {
     def grailsVersion = "1.3 > *"
     def dependsOn = [resources: "1.2-RC1"]
     def pluginExcludes = [
-        "grails-app/views/error.gsp"
+        "grails-app/views/error.gsp",
+        "grails-app/i18n/messages.properties",
+        "web-app/**"
     ]
 
     def title = "Page Resources Plugin"
