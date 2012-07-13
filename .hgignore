@@ -8,6 +8,7 @@ syntax: glob
 target
 plugin.xml
 *.zip
+*.zip.sha1
 
 # Files that we don't use, but grails insists on re-creating
 web-app/WEB-INF/tld/c.tld
