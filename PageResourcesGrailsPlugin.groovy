@@ -23,7 +23,8 @@ class PageResourcesGrailsPlugin {
     def pluginExcludes = [
         "grails-app/views/error.gsp",
         "grails-app/i18n/messages.properties",
-        "web-app/**"
+        "web-app/**",
+        "src/docs/**"
     ]
 
     def title = "Page Resources Plugin"
