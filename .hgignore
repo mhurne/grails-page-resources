@@ -1,0 +1,9 @@
+syntax: glob
+
+.idea
+target
+
+plugin.xml
+
+*.iml
+*.zip
