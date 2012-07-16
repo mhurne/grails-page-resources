@@ -46,3 +46,6 @@ simply
 with the same name as would have been automatically created (pages_*PATH*_*VIEWNAME*).  The Page Resources plugin will
 use your definition for the module rather than automatically create one, and will still automatically require the module
 in the view.
+
+Another option is to [override resources|http://grails-plugins.github.com/grails-resources/guide/5.%20Overriding%20resources.html]
+in the automatically defined page module.
