@@ -38,12 +38,9 @@ Enhances the resources plugin by allowing for creation of "page" resource module
 
     def license = "APACHE"
 
-    // Location of the plugin's issue tracker.
-//    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
+    def issueManagement = [ url: "https://github.com/davidmc24/grails-page-resources/issues" ]
 
-    // Online location of the plugin's browseable source code.
     def scm = [ url: "https://github.com/davidmc24/grails-page-resources/" ]
-//    def scm = [ url: "http://svn.grails-plugins.codehaus.org/browse/grails-plugins/" ]
 
     def doWithSpring = {
         pageResourcesInterceptor(PageResourcesInterceptor)
