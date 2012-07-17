@@ -39,7 +39,7 @@ modules = {
                 }
             } else {
                 File[] files = moduleDir.listFiles(
-                    [accept: { File f -> f.isFile() && f.name ==~ /.*\.(js|less|css)/}] as FileFilter
+                    [accept: { File f -> f.isFile() }] as FileFilter
                 ).sort()
                 if (files.length > 0) {
                     if (log.isInfoEnabled()) {
