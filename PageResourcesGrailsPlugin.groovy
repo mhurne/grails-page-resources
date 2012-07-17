@@ -34,7 +34,7 @@ class PageResourcesGrailsPlugin {
 Enhances the resources plugin by allowing for creation of "page" resource modules using convention over configuration.
 '''
 
-    def documentation = "http://grails.org/plugin/page-resources"
+    def documentation = "http://davidmc24.github.com/grails-page-resources/"
 
     def license = "APACHE"
 
