@@ -17,7 +17,7 @@
 import org.grails.plugin.resources.page.PageResourcesInterceptor
 
 class PageResourcesGrailsPlugin {
-    def version = "0.1-SNAPSHOT"
+    def version = "0.1"
     def grailsVersion = "1.3 > *"
     def dependsOn = [resources: "1.2-RC1"]
     def pluginExcludes = [
