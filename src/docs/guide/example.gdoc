@@ -1,0 +1,85 @@
+Here, we'll create an example application and run through a couple example usages of the plugin.
+
+Run the following commands to generate some scaffolding.  This will give us a simple app with a domain class and some
+views.
+* grails create-app grails-page-resources-test
+* cd grails-page-resources-test
+* grails create-domain-class org.bookstore.Book
+* Edit grails-app/domain/org/bookstore/Book.groovy to add a few fields:
+{code}
+package org.bookstore
+
+class Book {
+    Long id
+    Long version
+
+    String title
+    String author
+
+    static constraints = {
+    }
+}
+{code}
+* grails generate-all org.bookstore.Book
+* grails run-app (kill it when you're done examining the app)
+
+We now have a running, very simple app that allows you to perform CRUD operations on Books.  Now, let's say that we
+don't want in-line JavaScript, such as for the confirmation pop-up for the delete button.  We can pull that out into
+a page-specific JavaScript resource file.
+* Edit conf/BuildConfig.groovy to install the page-resources plugin (and jquery, since we'll use it later):
+{code}
+\...
+    plugins {
+        \...
+        runtime "\:page-resources\:"
+        runtime "\:jquery\:"
+    }
+}
+{code}
+* The page with the delete link is "/book/show/ID", so create web-app/pages/book/show/deleteConfirmation.js.  The filename can be whatever you want, but the path must match the controller/action.
+{code}
+$(document).ready(function() {
+    $('form').submit(function(event) {
+        if (!confirm("Are you sure?")) event.preventDefault();
+    });
+});
+{code}
+* Edit grails-app/views/book/show.gsp to remove the onclick handler:
+{code}
+\...
+    <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" />
+\...
+{code}
+
+If you run the app now, and go to the page with the delete link, you'll see that the deleteConfirmation.js file is
+automatically being included in the page, but we're getting a JavaScript error,
+"Uncaught ReferenceError: $ is not defined".  That's because our page depends on jQuery, but we haven't told the
+resources plugin.
+
+* Edit grails-app/conf/ApplicationResources.groovy to declare that our page modules should depend on jQuery (whose module was declared by the jQuery plugin):
+{code}
+\...
+    defaultPageDependencies {
+        dependsOn 'jquery'
+    }
+}
+{code}
+
+Now it works properly.
+
+{note}
+It's important to use dependsOn rather than simply adding an <r:require> to the GSP, because otherwise the resources
+plugin won't know in what order the resources should be included.
+{note}
+
+Now, let's say we don't think that the "Book ID deleted" confirmation message after deleting a book stands out enough,
+but we want the messages to stay the same on other pages.
+
+* Create web-app/pages/book/list/list.css:
+{code}
+.message {
+    font-size: 18px;
+}
+{code}
+
+The new CSS file will be automatically included in that page.

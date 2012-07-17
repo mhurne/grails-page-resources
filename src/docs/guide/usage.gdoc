@@ -3,7 +3,7 @@ h4. First, install the plugin by adding a dependency in @BuildConfig.groovy@:
 {code}
 plugins {
    ...
-   runtime ':page-resources:0.1'
+   runtime ':page-resources:'
 }
 {code}
 
