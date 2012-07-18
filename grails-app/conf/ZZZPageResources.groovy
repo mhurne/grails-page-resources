@@ -51,7 +51,7 @@ modules = {
                         }
                         defaultBundle(false)
                         files.each { file ->
-                            def url = file.path.substring(prefixLen)
+                            def url = file.path.substring(prefixLen).replaceAll('\\\\', '/')
                             resource(url: url)
                         }
                     })
