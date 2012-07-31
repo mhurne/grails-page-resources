@@ -15,10 +15,12 @@
  */
 
 import org.codehaus.groovy.grails.commons.ApplicationHolder
+import org.grails.plugin.resource.ResourceProcessor
 import org.slf4j.LoggerFactory
 
 def log = LoggerFactory.getLogger('org.grails.plugin.resource.page.PageResources')
 def application = ApplicationHolder.application
+ResourceProcessor grailsResourceProcessor = application.mainContext.getBean('grailsResourceProcessor')
 
 modules = {
     // This file should be named such that it comes alphabetically after any *Resources files that contain explicit
@@ -39,7 +41,19 @@ modules = {
                 }
             } else {
                 File[] files = moduleDir.listFiles(
-                    [accept: { File f -> f.isFile() }] as FileFilter
+                    [accept: { File file ->
+                        if (file.isFile()) {
+                            def url = file.path.substring(prefixLen)
+                            if (grailsResourceProcessor.getDefaultSettingsForURI(url)) {
+                                return true
+                            } else {
+                                log.info("Ignoring file of unsupported type: ${url}")
+                                return false
+                            }
+                        } else {
+                            return false
+                        }
+                    }] as FileFilter
                 ).sort()
                 if (files.length > 0) {
                     if (log.isInfoEnabled()) {

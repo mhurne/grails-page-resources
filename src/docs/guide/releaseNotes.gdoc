@@ -1,5 +1,8 @@
 Below is the history of Page Resource plugin releases.
 
+h4. 0.1.2 (Release TBD)
+* Fixed IllegalArgumentException on unsupported files in pages directory ( "Issue #2":https://github.com/davidmc24/grails-page-resources/issues/2 )
+
 h4. 0.1.1 (Released 7-18-2012)
 * Fixed IllegalArgumentException on Windows ( "Issue #1":https://github.com/davidmc24/grails-page-resources/issues/1 )
 
