@@ -15,6 +15,7 @@
  */
 
 import org.grails.plugin.resources.page.PageResourcesInterceptor
+import org.springframework.core.io.FileSystemResource
 
 class PageResourcesGrailsPlugin {
     def version = "0.1.2-SNAPSHOT"
@@ -42,7 +43,27 @@ Enhances the resources plugin by allowing for creation of "page" resource module
 
     def scm = [ url: "https://github.com/davidmc24/grails-page-resources/" ]
 
+    def watchedResources = [
+        "file:./web-app/pages/**/*.*" // Watch for page resource changes
+    ]
+
     def doWithSpring = {
         pageResourcesInterceptor(PageResourcesInterceptor)
+    }
+
+    def onChange = { event ->
+        def manager = event.manager
+        def resourcesPlugin = manager.getGrailsPlugin('resources').@plugin
+        if (event.source instanceof FileSystemResource) {
+            log.info("Scheduling reload of modules due to change of file $event.source.file")
+            resourcesPlugin.triggerReload {
+                event.application.mainContext.grailsResourceProcessor.reloadModules()
+            }
+        } else {
+            log.info("Scheduling reload of modules due to change of $event.source.name")
+            resourcesPlugin.triggerReload {
+                event.application.mainContext.grailsResourceProcessor.reloadModules()
+            }
+        }
     }
 }
