@@ -3,7 +3,7 @@ Below is the history of Page Resource plugin releases.
 h4. 0.2.0 (Release XXX)
 * New configuration option to enable bundling within page resource modules ( "Issue #6":https://github.com/davidmc24/grails-page-resources/issues/6 )
 
-h4. 0.1.2 (Release 7-31-2012)
+h4. 0.1.2 (Released 7-31-2012)
 * Fixed IllegalArgumentException on unsupported files in pages directory ( "Issue #2":https://github.com/davidmc24/grails-page-resources/issues/2 )
 * Fixed loading of new page resource files ( "Issue #4":https://github.com/davidmc24/grails-page-resources/issues/4 )
 
