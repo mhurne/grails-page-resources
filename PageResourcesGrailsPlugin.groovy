@@ -19,7 +19,7 @@ import org.springframework.core.io.FileSystemResource
 
 class PageResourcesGrailsPlugin {
     def version = "0.2.0-SNAPSHOT"
-    def grailsVersion = "1.3 > *"
+    def grailsVersion = "2.0 > *"
     def dependsOn = [resources: "1.2-RC2"]
     def pluginExcludes = [
         "grails-app/views/error.gsp",
