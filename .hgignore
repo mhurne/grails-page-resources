@@ -1,5 +1,9 @@
 syntax: glob
 
+# Mercurial files
+*.orig
+*.rej
+
 # IntelliJ project files
 .idea
 *.iml
