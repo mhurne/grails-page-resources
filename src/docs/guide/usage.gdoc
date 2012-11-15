@@ -1,16 +1,12 @@
-h4. First, install the plugin by adding a dependency in @BuildConfig.groovy@:
+h4. Installation
+
+Install the plugin by adding the following to your @BuildConfig.groovy@ (replace @VERSION@ with the desired version):
 
 {code}
 plugins {
-   ...
-   runtime ':page-resources:'
+    ...
+    runtime ':page-resources:VERSION'
 }
-{code}
-
-or install with @install-plugin@:
-
-{code}
-grails install-plugin page-resources
 {code}
 
 h4. Creating page modules
