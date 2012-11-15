@@ -49,3 +49,12 @@ in the view.
 
 Another option is to [override resources|http://grails-plugins.github.com/grails-resources/guide/5.%20Overriding%20resources.html]
 in the automatically defined page module.
+
+h4. Bundling all page resources
+
+By default, page resources will be served to the browser each on one file. If you want to bundle all of them together,
+just add the following to your @Config.groovy@:
+
+{code}
+grails.plugins.pageResources.bundlePageResources = true
+{code}
