@@ -18,7 +18,7 @@ import org.grails.plugin.resources.page.PageResourcesInterceptor
 import org.springframework.core.io.FileSystemResource
 
 class PageResourcesGrailsPlugin {
-    def version = "0.1.2"
+    def version = "0.2.0"
     def grailsVersion = "1.3 > *"
     def dependsOn = [resources: "1.2-RC1"]
     def pluginExcludes = [
@@ -42,6 +42,10 @@ Enhances the resources plugin by allowing for creation of "page" resource module
     def issueManagement = [ url: "https://github.com/davidmc24/grails-page-resources/issues" ]
 
     def scm = [ url: "https://github.com/davidmc24/grails-page-resources/" ]
+
+    def developers = [
+        [name: "Álvaro Sánchez-Mariscal", email: "alvaro.sanchez@salenda.es"]
+    ]
 
     def watchedResources = [
         "file:./web-app/pages/**/*.*" // Watch for page resource changes

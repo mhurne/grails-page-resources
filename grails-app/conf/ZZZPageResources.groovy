@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory
 
 def log = LoggerFactory.getLogger('org.grails.plugin.resource.page.PageResources')
 def application = ApplicationHolder.application
+def config = application.config
 ResourceProcessor grailsResourceProcessor = application.mainContext.getBean('grailsResourceProcessor')
 
 modules = {
@@ -63,7 +64,10 @@ modules = {
                         if (dependModule) {
                             dependsOn(dependModuleName)
                         }
-                        defaultBundle(false)
+                        if (!config.grails.plugins.pageResources.bundlePageResources) {
+                            defaultBundle(false)
+                        }
+
                         files.each { file ->
                             def url = file.path.substring(prefixLen).replaceAll('\\\\', '/')
                             resource(url: url)
