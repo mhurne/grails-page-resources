@@ -64,10 +64,12 @@ modules = {
                         if (dependModule) {
                             dependsOn(dependModuleName)
                         }
-                        if (!config.grails.plugins.pageResources.bundlePageResources) {
+                        def defaultBundleVal = config.flatten().get('grails.plugins.pageResources.defaultBundle')
+                        if (defaultBundleVal instanceof String) {
+                            defaultBundle(defaultBundleVal)
+                        } else if (!defaultBundleVal) {
                             defaultBundle(false)
                         }
-
                         files.each { file ->
                             def url = file.path.substring(prefixLen).replaceAll('\\\\', '/')
                             resource(url: url)

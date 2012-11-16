@@ -59,8 +59,11 @@ In general, if you find you're running into performance problems that might be r
 attempting to reduce the number of page modules you use.
 {note}
 
-If you want to allow bundling to occur, add the following to your @Config.groovy@:
+If you want to allow auto-bundling to occur, add the following to your @Config.groovy@:
 
 {code}
-grails.plugins.pageResources.bundlePageResources = true
+grails.plugins.pageResources.defaultBundle = true
 {code}
+
+Alternatively, if you want all page modules to use a single bundle, you can set this configuration key to a String value, which
+will be passed to the resources plugin as the argument to defaultBundle for every page module.
