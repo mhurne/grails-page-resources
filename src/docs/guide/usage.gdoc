@@ -46,10 +46,20 @@ in the view.
 Another option is to [override resources|http://grails-plugins.github.com/grails-resources/guide/5.%20Overriding%20resources.html]
 in the automatically defined page module.
 
-h4. Bundling all page resources
+h4. Resource Bundling
 
-By default, page resources will be served to the browser each on one file. If you want to bundle all of them together,
-just add the following to your @Config.groovy@:
+Since page resources are by definition specific to a single page and not intended for sharing, they aren't a good
+conceptual fit for [bundling|http://grails-plugins.github.com/grails-resources/guide/3.%20Declaring%20resources.html#3.4%20Bundling].
+By default, the page resources plugin sets "defaultBundle(false)" for each page module.  This disables the default bundling
+that the resources plugin would otherwise do for modules with more than one resource, allowing for more understandable path
+names (unless you're using something like the [cached-resources|http://grails.org/plugin/cached-resources] plugin, of course).
+
+{note}
+In general, if you find you're running into performance problems that might be resolved via bundling, you should consider
+attempting to reduce the number of page modules you use.
+{note}
+
+If you want to allow bundling to occur, add the following to your @Config.groovy@:
 
 {code}
 grails.plugins.pageResources.bundlePageResources = true
