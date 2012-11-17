@@ -65,7 +65,7 @@ modules = {
                             dependsOn(dependModuleName)
                         }
                         def defaultBundleVal = config.flatten().get('grails.plugins.pageResources.defaultBundle')
-                        if (defaultBundleVal instanceof String) {
+                        if (defaultBundleVal instanceof CharSequence) {
                             defaultBundle(defaultBundleVal)
                         } else if (!defaultBundleVal) {
                             defaultBundle(false)
