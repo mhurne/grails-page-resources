@@ -22,59 +22,51 @@ def log = LoggerFactory.getLogger('org.grails.plugin.resource.page.PageResources
 def application = ApplicationHolder.application
 def config = application.config
 ResourceProcessor grailsResourceProcessor = application.mainContext.getBean('grailsResourceProcessor')
+def mainContext = application.mainContext
 
 modules = {
     // This file should be named such that it comes alphabetically after any *Resources files that contain explicit
     // page module definitions.  Otherwise, it will overrride the other definition.
 
-    def rootDir = application.parentContext.getResource("/").getFile()
-    def pagesDir = new File(rootDir, 'pages')
-    int prefixLen = rootDir.path.length()
     def dependModuleName = 'defaultPageDependencies'
     def dependModule = delegate._modules.find { it.name == dependModuleName }
-    if (pagesDir.isDirectory()) {
-        pagesDir.eachDirRecurse { File moduleDir ->
-            String moduleName = moduleDir.path.substring(prefixLen + 1).replaceAll(/[\/\\]/, '_')
-            def module = delegate._modules.find { it.name == moduleName }
-            if (module) {
-                if (log.isDebugEnabled()) {
-                    log.debug("Page module ${moduleName} already defined; using pre-existing definition")
+    def pageResources = mainContext.getResources('/pages/**')
+    def moduleResources = pageResources.findAll{it.filename.empty}
+    moduleResources.each { moduleResource ->
+        String modulePath = moduleResource.path
+        String moduleName = modulePath[1..-2].replaceAll(/[\/\\]/, '_')
+        def module = delegate._modules.find { it.name == moduleName }
+        if (module) {
+            if (log.isDebugEnabled()) {
+                log.debug("Page module ${moduleName} already defined; using pre-existing definition")
+            }
+        } else {
+            def fileResources = pageResources.findAll{ pageResource ->
+                !pageResource.filename.empty && pageResource.path.startsWith(modulePath) && pageResource.path.indexOf('/', modulePath.length()) == -1
+            }.findAll{ pageResource ->
+                boolean supported = grailsResourceProcessor.getDefaultSettingsForURI(pageResource.path)
+                if (!supported) {
+                    log.info("Ignoring file of unsupported type: ${pageResource.path}")
                 }
-            } else {
-                File[] files = moduleDir.listFiles(
-                    [accept: { File file ->
-                        if (file.isFile()) {
-                            def url = file.path.substring(prefixLen)
-                            if (grailsResourceProcessor.getDefaultSettingsForURI(url)) {
-                                return true
-                            } else {
-                                log.info("Ignoring file of unsupported type: ${url}")
-                                return false
-                            }
-                        } else {
-                            return false
-                        }
-                    }] as FileFilter
-                ).sort()
-                if (files.length > 0) {
-                    if (log.isInfoEnabled()) {
-                        log.info("Defining page module: ${moduleName}")
+                return supported
+            }.sort()
+            if (!fileResources.isEmpty()) {
+                if (log.isInfoEnabled()) {
+                    log.info("Defining page module: ${moduleName}")
+                }
+                delegate.invokeMethod(moduleName) {
+                    if (dependModule) {
+                        dependsOn(dependModuleName)
                     }
-                    delegate.invokeMethod(moduleName, {
-                        if (dependModule) {
-                            dependsOn(dependModuleName)
-                        }
-                        def defaultBundleVal = config.flatten().get('grails.plugins.pageResources.defaultBundle')
-                        if (defaultBundleVal instanceof CharSequence) {
-                            defaultBundle(defaultBundleVal)
-                        } else if (!defaultBundleVal) {
-                            defaultBundle(false)
-                        }
-                        files.each { file ->
-                            def url = file.path.substring(prefixLen).replaceAll('\\\\', '/')
-                            resource(url: url)
-                        }
-                    })
+                    def defaultBundleVal = config.flatten().get('grails.plugins.pageResources.defaultBundle')
+                    if (defaultBundleVal instanceof CharSequence) {
+                        defaultBundle(defaultBundleVal)
+                    } else if (!defaultBundleVal) {
+                        defaultBundle(false)
+                    }
+                    fileResources.each { fileResource ->
+                        resource(url: fileResource.path)
+                    }
                 }
             }
         }
