@@ -8,9 +8,14 @@ syntax: glob
 .idea
 *.iml
 
+# Eclipse project files
+.classpath
+.project
+.settings
+target-eclipse
+
 # Build output
 target
-target-eclipse
 plugin.xml
 *.zip
 *.zip.sha1
