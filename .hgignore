@@ -10,6 +10,7 @@ syntax: glob
 
 # Build output
 target
+target-eclipse
 plugin.xml
 *.zip
 *.zip.sha1
