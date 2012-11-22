@@ -16,19 +16,15 @@
 
 package org.grails.plugin.resources.page
 
-import javax.annotation.Resource
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
-import org.springframework.web.servlet.ModelAndView
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter
+import org.springframework.webflow.definition.FlowDefinition
+import org.springframework.webflow.execution.FlowExecutionListener
+import org.springframework.webflow.execution.factory.FlowExecutionListenerLoader
 
-class PageResourcesInterceptor extends HandlerInterceptorAdapter {
-    @Resource
-    PageResourcesModuleRequester pageResourcesModuleRequester
+class ListFlowExecutionListenerLoader implements FlowExecutionListenerLoader {
+    List<FlowExecutionListener> listeners = []
 
     @Override
-    void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) {
-        String viewName = modelAndView?.viewName
-        pageResourcesModuleRequester.requestModuleForView(viewName)
+    FlowExecutionListener[] getListeners(FlowDefinition flowDefinition) {
+        return listeners as FlowExecutionListener[]
     }
 }

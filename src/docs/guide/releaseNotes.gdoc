@@ -4,6 +4,7 @@ h4. 0.2.0 (Release XXX)
 * Updated dependency on resources plugin to 1.2.RC2
 * New configuration option to enable bundling within page resource modules ( "Issue #6":https://github.com/davidmc24/grails-page-resources/issues/6 )
 * Added support for running in a non-expanded WAR ( "Issue #3:https://github.com/davidmc24/grails-page-resources/issues/3 )
+* Added support for automatically requiring page modules for webflows ( "Issue #5:https://github.com/davidmc24/grails-page-resources/issues/5 )
 
 h4. 0.1.2 (Released 7-31-2012)
 * Fixed IllegalArgumentException on unsupported files in pages directory ( "Issue #2":https://github.com/davidmc24/grails-page-resources/issues/2 )

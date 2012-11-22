@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
+import org.grails.plugin.resources.page.ListFlowExecutionListenerLoader
+import org.grails.plugin.resources.page.PageResourcesFlowExecutionListener
 import org.grails.plugin.resources.page.PageResourcesInterceptor
+import org.grails.plugin.resources.page.PageResourcesModuleRequester
+import org.springframework.beans.PropertyValue
+import org.springframework.beans.factory.config.RuntimeBeanReference
 import org.springframework.core.io.FileSystemResource
 
 class PageResourcesGrailsPlugin {
     def version = "0.2.0-SNAPSHOT"
     def grailsVersion = "2.0 > *"
     def dependsOn = [resources: "1.2.RC2"]
+    def loadAfter = ['webflow']
     def pluginExcludes = [
         "grails-app/views/error.gsp",
         "grails-app/i18n/messages.properties",
@@ -52,7 +58,31 @@ Enhances the resources plugin by allowing for creation of "page" resource module
     ]
 
     def doWithSpring = {
+        pageResourcesModuleRequester(PageResourcesModuleRequester)
         pageResourcesInterceptor(PageResourcesInterceptor)
+        if (manager?.hasGrailsPlugin('webflow')) {
+            pageResourcesFlowExecutionListener(PageResourcesFlowExecutionListener)
+            def flowListeners = [ref('pageResourcesFlowExecutionListener')]
+            def oldExecutionListenerLoaderBeanDef = delegate.getBeanDefinition('executionListenerLoader')
+            if (oldExecutionListenerLoaderBeanDef) {
+                oldExecutionListenerLoaderBeanDef.constructorArgumentValues.getGenericArgumentValues().each {
+                    flowListeners.add(it.value)
+                }
+            }
+            executionListenerLoader(ListFlowExecutionListenerLoader) {
+                listeners = flowListeners
+            }
+            def flowExecutionFactoryBeanDef = delegate.getBeanDefinition('flowExecutionFactory')
+            def executionListenerLoaderPropertyValue = flowExecutionFactoryBeanDef.propertyValues.getPropertyValue('executionListenerLoader')
+            if (executionListenerLoaderPropertyValue == null) {
+                log.debug("Registering executionListenerLoader with flowExecutionFactory")
+                flowExecutionFactoryBeanDef.propertyValues.addPropertyValue(new PropertyValue('executionListenerLoader', ref("executionListenerLoader")))
+            } else if (executionListenerLoaderPropertyValue.value instanceof RuntimeBeanReference && executionListenerLoaderPropertyValue.value.beanName == 'executionListenerLoader') {
+                log.debug("executionListenerLoader already registered with flowExecutionFactory") // No changes needed
+            } else {
+                log.warn("Unknown executionListenerLoader registered for flowExecutionFactory; cannot automatically register executionListenerLoader")
+            }
+        }
     }
 
     def onChange = { event ->
