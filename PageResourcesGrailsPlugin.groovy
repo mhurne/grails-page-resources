@@ -37,17 +37,15 @@ class PageResourcesGrailsPlugin {
     def title = "Page Resources Plugin"
     def author = "David M. Carr"
     def authorEmail = "david@carrclan.us"
-    def description = '''\
-Enhances the resources plugin by allowing for creation of "page" resource modules using convention over configuration.
-'''
+    def description = 'Enhances the resources plugin by allowing for creation of "page" resource modules using convention over configuration.'
 
-    def documentation = "http://davidmc24.github.com/grails-page-resources/"
+    def documentation = "http://davidmc24.bitbucket.org/grails-page-resources/"
 
     def license = "APACHE"
 
-    def issueManagement = [ url: "https://github.com/davidmc24/grails-page-resources/issues" ]
+    def issueManagement = [ url: "https://bitbucket.org/davidmc24/grails-page-resources/issues?status=new&status=open" ]
 
-    def scm = [ url: "https://github.com/davidmc24/grails-page-resources/" ]
+    def scm = [ url: "https://davidmc24@bitbucket.org/davidmc24/grails-page-resources/" ]
 
     def developers = [
         [name: "Álvaro Sánchez-Mariscal", email: "alvaro.sanchez@salenda.es"]

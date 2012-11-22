@@ -2,16 +2,17 @@ Below is the history of Page Resource plugin releases.
 
 h4. 0.2.0 (Release XXX)
 * Updated dependency on resources plugin to 1.2.RC2
-* New configuration option to enable bundling within page resource modules ( "Issue #6":https://github.com/davidmc24/grails-page-resources/issues/6 )
-* Added support for running in a non-expanded WAR ( "Issue #3:https://github.com/davidmc24/grails-page-resources/issues/3 )
-* Added support for automatically requiring page modules for webflows ( "Issue #5:https://github.com/davidmc24/grails-page-resources/issues/5 )
+* New configuration option to enable bundling within page resource modules ( "GitHub Issue #6":https://github.com/davidmc24/grails-page-resources/issues/6 )
+* Added support for running in a non-expanded WAR ( "GitHub Issue #3":https://github.com/davidmc24/grails-page-resources/issues/3 )
+* Added support for automatically requiring page modules for webflows ( "GitHub Issue #5":https://github.com/davidmc24/grails-page-resources/issues/5 )
+* Shifted primary hosting from "GitHub":https://github.com/davidmc24/grails-page-resources to "Bitbucket":https://bitbucket.org/davidmc24/grails-page-resources
 
 h4. 0.1.2 (Released 7-31-2012)
-* Fixed IllegalArgumentException on unsupported files in pages directory ( "Issue #2":https://github.com/davidmc24/grails-page-resources/issues/2 )
-* Fixed loading of new page resource files ( "Issue #4":https://github.com/davidmc24/grails-page-resources/issues/4 )
+* Fixed IllegalArgumentException on unsupported files in pages directory ( "GitHub Issue #2":https://github.com/davidmc24/grails-page-resources/issues/2 )
+* Fixed loading of new page resource files ( "GitHub Issue #4":https://github.com/davidmc24/grails-page-resources/issues/4 )
 
 h4. 0.1.1 (Released 7-18-2012)
-* Fixed IllegalArgumentException on Windows ( "Issue #1":https://github.com/davidmc24/grails-page-resources/issues/1 )
+* Fixed IllegalArgumentException on Windows ( "GitHub Issue #1":https://github.com/davidmc24/grails-page-resources/issues/1 )
 
 h4. 0.1 (Released 7-17-2012)
 * Initial release
