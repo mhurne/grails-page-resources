@@ -1,5 +1,8 @@
 Below is the history of Page Resource plugin releases.
 
+h4. 0.2.1 (Release TBD)
+* Features TBD
+
 h4. 0.2.0 (Released 11-21-2012)
 * Updated dependency on resources plugin to 1.2.RC2
 * New configuration option to enable bundling within page resource modules ( "GitHub Issue #6":https://github.com/davidmc24/grails-page-resources/issues/6 )
