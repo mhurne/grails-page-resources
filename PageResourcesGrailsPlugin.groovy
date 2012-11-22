@@ -61,10 +61,12 @@ Enhances the resources plugin by allowing for creation of "page" resource module
         pageResourcesModuleRequester(PageResourcesModuleRequester)
         pageResourcesInterceptor(PageResourcesInterceptor)
         if (manager?.hasGrailsPlugin('webflow')) {
+            log.debug('Registering flow execution listener based on detection of webflow plugin')
             pageResourcesFlowExecutionListener(PageResourcesFlowExecutionListener)
             def flowListeners = [ref('pageResourcesFlowExecutionListener')]
             def oldExecutionListenerLoaderBeanDef = delegate.getBeanDefinition('executionListenerLoader')
             if (oldExecutionListenerLoaderBeanDef) {
+                log.debug('Adding flow execution listener to existing execution listeners')
                 oldExecutionListenerLoaderBeanDef.constructorArgumentValues.getGenericArgumentValues().each {
                     flowListeners.add(it.value)
                 }

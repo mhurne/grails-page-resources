@@ -34,10 +34,10 @@ class PageResourcesModuleRequester {
         if (viewName) {
             String moduleName = 'pages' + viewName.replaceAll('/', '_')
             if (resourceProcessor.getModule(moduleName)) {
-                if (log.isDebugEnabled()) {
-                    log.debug("Automatically requiring page module ${moduleName} for view ${viewName}")
-                }
+                log.debug('Automatically requiring page module {} for view {}', moduleName, viewName)
                 resourceTagLib.require(module: moduleName)
+            } else {
+                log.debug('No page module {} defined for view {}', moduleName, viewName)
             }
         }
     }
