@@ -57,6 +57,7 @@ class PageResourcesGrailsPlugin {
 
     def doWithSpring = {
         pageResourcesModuleRequester(PageResourcesModuleRequester)
+        log.debug('Registering interceptor')
         pageResourcesInterceptor(PageResourcesInterceptor)
         if (manager?.hasGrailsPlugin('webflow')) {
             log.debug('Registering flow execution listener based on detection of webflow plugin')
