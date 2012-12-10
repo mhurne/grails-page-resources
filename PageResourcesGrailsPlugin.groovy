@@ -48,7 +48,8 @@ class PageResourcesGrailsPlugin {
     def scm = [ url: "https://davidmc24@bitbucket.org/davidmc24/grails-page-resources/" ]
 
     def developers = [
-        [name: "Álvaro Sánchez-Mariscal", email: "alvaro.sanchez@salenda.es"]
+        [name: "Álvaro Sánchez-Mariscal", email: "alvaro.sanchez@salenda.es"],
+        [name: "Matt Hurne", email: "matt@thehurnes.com"]
     ]
 
     def watchedResources = [
