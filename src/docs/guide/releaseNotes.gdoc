@@ -1,7 +1,7 @@
 Below is the history of Page Resource plugin releases.
 
 h4. 0.2.2 (Release TBD)
-* Features TBD
+* Don't export dependency on spring-webflow ( "Bitbucket Pull Request #1":https://bitbucket.org/davidmc24/grails-page-resources/pull-request/1 )
 
 h4. 0.2.1 (Released 11-22-2012)
 * Fixes compilation when webflow plugin is not installed ( "Bitbucket Issue #1":https://bitbucket.org/davidmc24/grails-page-resources/issue/1 )
