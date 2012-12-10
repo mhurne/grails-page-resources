@@ -11,7 +11,9 @@ grails.project.dependency.resolution = {
         //mavenLocal()
     }
     dependencies {
-        build("org.springframework.webflow:spring-webflow:2.3.1.RELEASE")
+        build("org.springframework.webflow:spring-webflow:2.3.1.RELEASE") {
+            export = false
+        }
     }
     plugins {
         compile(":resources:1.2.RC2")
