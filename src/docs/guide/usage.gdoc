@@ -9,6 +9,17 @@ plugins {
 }
 {code}
 
+If you need to use a different version of spring-webflow than the plugin was developed with, you can use this instead:
+
+{code}
+plugins {
+    ...
+    runtime(':page-resources:VERSION') {
+        excludes 'spring-webflow'
+    }
+}
+{code}
+
 h4. Creating page modules
 
 Next, you'll need to create some page modules.  Within @web-app/pages@, create a directory structure that parallels the
