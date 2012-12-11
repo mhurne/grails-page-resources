@@ -1,6 +1,9 @@
 Below is the history of Page Resource plugin releases.
 
-h4. 0.2.3 (Next release)
+h4. 0.2.4 (Next release)
+* Features TBD
+
+h4. 0.2.3 (Released 12-11-2012)
 * Backout "Don't export dependency on spring-webflow"
 
 h4. 0.2.2 (Released 12-10-2012)
