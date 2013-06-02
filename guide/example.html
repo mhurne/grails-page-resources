@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>3 Example Scenario 0.2.4-SNAPSHOT</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>2</strong><span>Usage</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/example.html"><strong>3</strong><span>Example Scenario</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>Enhances the resources plugin by allowing for creation of &quot;page&quot; resource modules using convention over configuration.</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../guide/usage.html">&lt;&lt; <strong>2</strong><span>Usage</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+
+
+                <div class="project">
+                    <h1>3 Example Scenario - Reference Documentation</h1>
+
+                    <p><strong>Authors:</strong> David M. Carr</p>
+
+                    <p><strong>Version:</strong> 0.2.4-SNAPSHOT</p>
+
+                    
+                </div>
+
+                
+
+                
+
+<h1 id="example">3 Example Scenario</h1>
+Here, we'll create an example application and run through a couple example usages of the plugin.<p class="paragraph"/>Run the following commands to generate some scaffolding.  This will give us a simple app with a domain class and some
+views.
+<ul class="star">
+<li>grails create-app grails-page-resources-test</li>
+<li>cd grails-page-resources-test</li>
+<li>grails create-domain-class org.bookstore.Book</li>
+<li>Edit grails-app/domain/org/bookstore/Book.groovy to add a few fields:</li>
+</ul><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> org.bookstore<p class="paragraph"/>class Book &#123;
+    <span class="java&#45;object">Long</span> id
+    <span class="java&#45;object">Long</span> version<p class="paragraph"/>    <span class="java&#45;object">String</span> title
+    <span class="java&#45;object">String</span> author<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+    &#125;
+&#125;</pre></div>
+<ul class="star">
+<li>grails generate-all org.bookstore.Book</li>
+<li>grails run-app (kill it when you're done examining the app)</li>
+</ul><p class="paragraph"/>We now have a running, very simple app that allows you to perform CRUD operations on Books.  Now, let's say that we
+don't want in-line JavaScript, such as for the confirmation pop-up for the delete button.  We can pull that out into
+a page-specific JavaScript resource file.
+<ul class="star">
+<li>Edit conf/BuildConfig.groovy to install the page-resources plugin (and jquery, since we'll use it later):</li>
+</ul><p class="paragraph"/><div class="code"><pre>&#46;..
+    plugins &#123;
+        &#46;..
+        runtime <span class="java&#45;quote">"&#58;page&#45;resources&#58;"</span>
+        runtime <span class="java&#45;quote">"&#58;jquery&#58;"</span>
+    &#125;
+&#125;</pre></div>
+<ul class="star">
+<li>The page with the delete link is "/book/show/ID", so create web-app/pages/book/show/deleteConfirmation.js.  The filename can be whatever you want, but the path must match the controller/action.</li>
+</ul><p class="paragraph"/><div class="code"><pre>$(document).ready(function() &#123;
+    $('form').submit(function(event) &#123;
+        <span class="java&#45;keyword">if</span> (!confirm(<span class="java&#45;quote">"Are you sure?"</span>)) event.preventDefault();
+    &#125;);
+&#125;);</pre></div>
+<ul class="star">
+<li>Edit grails-app/views/book/show.gsp to remove the onclick handler:</li>
+</ul><p class="paragraph"/><div class="code"><pre>&#46;..
+    &#60;g:actionSubmit class=<span class="java&#45;quote">"delete"</span> action=<span class="java&#45;quote">"delete"</span> value=<span class="java&#45;quote">"$&#123;message(code: '<span class="java&#45;keyword">default</span>.button.delete.label', <span class="java&#45;keyword">default</span>: 'Delete')&#125;"</span> /&#62;
+&#46;..</pre></div><p class="paragraph"/>If you run the app now, and go to the page with the delete link, you'll see that the deleteConfirmation.js file is
+automatically being included in the page, but we're getting a JavaScript error,
+"Uncaught ReferenceError: $ is not defined".  That's because our page depends on jQuery, but we haven't told the
+resources plugin.
+<ul class="star">
+<li>Edit grails-app/conf/ApplicationResources.groovy to declare that our page modules should depend on jQuery (whose module was declared by the jQuery plugin):</li>
+</ul><p class="paragraph"/><div class="code"><pre>&#46;..
+    defaultPageDependencies &#123;
+        dependsOn 'jquery'
+    &#125;
+&#125;</pre></div><p class="paragraph"/>Now it works properly.<p class="paragraph"/><blockquote class="note">
+It's important to use dependsOn rather than simply adding an &#60;r:require&#62; to the GSP, because otherwise the resources
+plugin won't know in what order the resources should be included.
+</blockquote><p class="paragraph"/>Now, let's say we don't think that the "Book ID deleted" confirmation message after deleting a book stands out enough,
+but we want the messages to stay the same on other pages.
+<ul class="star">
+<li>Create web-app/pages/book/list/list.css:</li>
+</ul><p class="paragraph"/><div class="code"><pre>.message &#123;
+    font&#45;size: 18px;
+&#125;</pre></div><p class="paragraph"/>The new CSS file will be automatically included in that page.
+
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../guide/usage.html">&lt;&lt; <strong>2</strong><span>Usage</span></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    Copyright 2012 David M. Carr and others
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>

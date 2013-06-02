@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>2 Usage 0.2.4-SNAPSHOT</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>2</strong><span>Usage</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/example.html"><strong>3</strong><span>Example Scenario</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>Enhances the resources plugin by allowing for creation of &quot;page&quot; resource modules using convention over configuration.</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+                    <div class="toc-item next-right"><a href="../guide/example.html"><strong>3</strong><span>Example Scenario</span> >></a></div>
+                
+
+
+                <div class="project">
+                    <h1>2 Usage - Reference Documentation</h1>
+
+                    <p><strong>Authors:</strong> David M. Carr</p>
+
+                    <p><strong>Version:</strong> 0.2.4-SNAPSHOT</p>
+
+                    
+                </div>
+
+                
+
+                
+
+<h1 id="usage">2 Usage</h1>
+<h4>Installation</h4><p class="paragraph"/>Install the plugin by adding the following to your <code>BuildConfig.groovy</code> (replace <code>VERSION</code> with the desired version):<p class="paragraph"/><div class="code"><pre>plugins &#123;
+    &#8230;
+    runtime ':page&#45;resources:VERSION'
+&#125;</pre></div><p class="paragraph"/>If you need to use a different version of spring-webflow than the plugin was developed with, you can use this instead:<p class="paragraph"/><div class="code"><pre>plugins &#123;
+    &#8230;
+    runtime(':page&#45;resources:VERSION') &#123;
+        excludes 'spring&#45;webflow'
+    &#125;
+&#125;</pre></div><p class="paragraph"/><h4>Creating page modules</h4><p class="paragraph"/>Next, you'll need to create some page modules.  Within <code>web-app/pages</code>, create a directory structure that parallels the
+path to a view.  For example, if you have a file <code>grails-app/views/user/view.gsp</code>, you would create directory
+<code>web-app/pages/user/view</code>.  Create any page-specific resources that you want the view to include in this directory.
+For example, if the page requires special styling you can add .css or .less files, or if the page requires special
+Javascript behavior you can add .js files.  For every such directory that contains files, a resource module will be
+automatically created, and the view will automatically require it.  In this example, the module would be named
+"pages_user_view" (the directory path with slashes replaced with underscores).  Files in the directory are included
+in the module in alphabetical order.<p class="paragraph"/><h4>Default page dependencies</h4><p class="paragraph"/>You may have some JavaScript libraries that your page-specific scripts use.  A JavaScript framework such as jQuery
+would be a common example of this.  You need to tell the resources plugin about these dependencies, or they may be
+included in the wrong ordering, resulting in JavaScript errors.  These situations can often be resolved using a default
+page dependencies module.  If you
+<a href="http://grails-plugins.github.com/grails-resources/guide/3.%20Declaring%20resources.html" target="blank">declare a resource module</a>
+named <code>defaultPageDependencies</code>, the page modules will automatically list it as a dependency.  If you list all your
+commonly used libraries as dependencies in your <code>defaultPageDependencies</code> module, you generally won't need to do any
+page-specific configuration for most views.  If you need to list dependencies not appropriate for the default page
+dependencies, please see the "Explicit page module definitions" section below.<p class="paragraph"/><h4>Explicit page module definitions</h4><p class="paragraph"/>In some cases, you may need additional control over the contents of the resource module for a page.  Examples of this
+include when you need to vary from the default page dependencies, when you need to include additional resources in
+the page module, or when you need to specify special processing for particular resources in the module.  In these cases,
+simply
+<a href="http://grails-plugins.github.com/grails-resources/guide/3.%20Declaring%20resources.html" target="blank">declare a resource module</a>
+with the same name as would have been automatically created (pages_<strong class="bold">PATH</strong>_<strong class="bold">VIEWNAME</strong>).  The Page Resources plugin will
+use your definition for the module rather than automatically create one, and will still automatically require the module
+in the view.<p class="paragraph"/>Another option is to <a href="http://grails-plugins.github.com/grails-resources/guide/5.%20Overriding%20resources.html" target="blank">override resources</a>
+in the automatically defined page module.<p class="paragraph"/><h4>Resource Bundling</h4><p class="paragraph"/>Since page resources are by definition specific to a single page and not intended for sharing, they aren't a good
+conceptual fit for <a href="http://grails-plugins.github.com/grails-resources/guide/3.%20Declaring%20resources.html#3.4%20Bundling" target="blank">bundling</a>.
+By default, the page resources plugin sets "defaultBundle(false)" for each page module.  This disables the default bundling
+that the resources plugin would otherwise do for modules with more than one resource, allowing for more understandable path
+names (unless you're using something like the <a href="http://grails.org/plugin/cached-resources" target="blank">cached-resources</a> plugin, of course).<p class="paragraph"/><blockquote class="note">
+In general, if you find you're running into performance problems that might be resolved via bundling, you should consider
+attempting to reduce the number of page modules you use.
+</blockquote><p class="paragraph"/>If you want to allow auto-bundling to occur, add the following to your <code>Config.groovy</code>:<p class="paragraph"/><div class="code"><pre>grails.plugins.pageResources.defaultBundle = <span class="java&#45;keyword">true</span></pre></div><p class="paragraph"/>Alternatively, if you want all page modules to use a single bundle, you can set this configuration key to a String value, which
+will be passed to the resources plugin as the argument to defaultBundle for every page module.
+
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../guide/example.html"><strong>3</strong><span>Example Scenario</span> >></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    Copyright 2012 David M. Carr and others
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>
