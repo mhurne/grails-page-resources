@@ -1,5 +1,7 @@
 This is the Grails Page Resources plugin.
 
+[![Build Status](https://travis-ci.org/commercehub-oss/grails-page-resources.png)](https://travis-ci.org/commercehub-oss/grails-page-resources)
+
 It provides the [Grails Resources plugin][resources] with the ability to use convention over configuration to define "page modules",
 which allow having page-specific JavaScript/CSS/LESS resources.
 
