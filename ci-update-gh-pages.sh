@@ -11,7 +11,8 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/commercehub-oss/grails-page-resources.git gh-pages > /dev/null
   # go into directory and copy data we're interested in to that directory
   cd gh-pages
-  cp -Rf $HOME/docs/* .
+  mkdir docs
+  cp -Rf $HOME/docs/* docs/
   # add, commit and push files
   git add -f .
   git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
