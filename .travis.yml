@@ -1,4 +1,12 @@
+---
 language: groovy
-script: ./grailsw package-plugin && ./grailsw doc
+script: ./ci-build.sh
+after_success: ./ci-update-gh-pages.sh
 jdk:
-  - openjdk6
+- openjdk6
+env:
+  global:
+    secure: |-
+      FuFHN3SAojHQxiigu5w8nrytCIur98wjRDHyJIkRaV42zpOH1u1iOWSeMFu9
+      /8iwo7TB/C4ljSpy6hNlDy5a+9pq0nENzahR26EHDsx5ZqoM6KdAd7DyY803
+      irY7WkEjjgvMgZGQuGP+fKHvNWlun1KxbD6mK5HXaoZeSA1iFqg=
