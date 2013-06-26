@@ -10,8 +10,8 @@ stacktrace.log
 /*DB.*
 /cobertura.ser
 .DS_Store
-/target/
-/out/
+target/
+out/
 /web-app/plugins
 /web-app/WEB-INF/classes
 *.iml
