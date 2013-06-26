@@ -9,7 +9,7 @@ grails.project.dependency.resolution = {
         //mavenLocal()
     }
     dependencies {
-        build("org.springframework.webflow:spring-webflow:2.3.1.RELEASE")
+        compile("org.springframework.webflow:spring-webflow:2.3.1.RELEASE")
     }
     plugins {
         compile(":resources:1.2.RC2")
