@@ -4,9 +4,20 @@ script: ./ci-build.sh
 after_success: ./ci-update-gh-pages.sh
 jdk:
 - openjdk6
+branches:
+  only:
+  - master
 env:
   global:
-    secure: |-
+  - secure: |-
       FuFHN3SAojHQxiigu5w8nrytCIur98wjRDHyJIkRaV42zpOH1u1iOWSeMFu9
       /8iwo7TB/C4ljSpy6hNlDy5a+9pq0nENzahR26EHDsx5ZqoM6KdAd7DyY803
       irY7WkEjjgvMgZGQuGP+fKHvNWlun1KxbD6mK5HXaoZeSA1iFqg=
+  - secure: |-
+      Q/7vFxauEKTACyrvBaDNCF9331BH8VR0JFBOVoZD9MQXVobgoUxltZr/dyCT
+      SEeT1BtjIDRyO1SlqkbRzxAMkfDDShgAlwCBCdSBpJKaKIY+aNMz3PQutaIL
+      6+CIT8wmlTB9oP23eZx6cxNFA7ZV12NOuiXxoiTiiPw/x92KB8k=
+  - secure: |-
+      F+iXuFpwLw+0WBtiLtRl5WgoZ8j1e29WkXZrPQVP0FdklFAL4TAw2OkY5UsQ
+      hIAttCwm6M0W/dkTSb8g8Q4a1c4ZQqnrNP6FWxVut7S3fB/W/yFAJaoz0P4X
+      AvjzEGFhEW8x0fhSO2wXtRQiIE4LOTRqS1ujt0XpdDR0tnUsX8Y=
