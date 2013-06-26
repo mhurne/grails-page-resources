@@ -3,6 +3,7 @@ Below is the history of Page Resource plugin releases.
 h4. 0.2.4 (Next release)
 * Features TBD
 * Shifted hosting from BitBucket to GitHub
+* Added CI support, including automatic publishing of documentation and snapshot builds
 
 h4. 0.2.3 (Released 12-11-2012)
 * Backout "Don't export dependency on spring-webflow"
