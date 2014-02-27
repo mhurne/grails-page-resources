@@ -12,7 +12,7 @@ grails.project.dependency.resolution = {
         compile("org.springframework.webflow:spring-webflow:2.3.1.RELEASE")
     }
     plugins {
-        compile(":resources:1.2.RC2")
+        compile(":resources:1.2.6")
         build(":release:2.2.0") {
             export = false
         }

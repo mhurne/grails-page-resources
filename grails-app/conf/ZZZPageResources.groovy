@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 import org.grails.plugin.resource.ResourceProcessor
 import org.slf4j.LoggerFactory
 
 def log = LoggerFactory.getLogger('org.grails.plugin.resources.page.PageResources')
-def application = ApplicationHolder.application
-def config = application.config
-ResourceProcessor grailsResourceProcessor = application.mainContext.getBean('grailsResourceProcessor')
-def mainContext = application.mainContext
+def config = grailsApplication.config
+ResourceProcessor grailsResourceProcessor = grailsApplication.mainContext.getBean('grailsResourceProcessor')
+def mainContext = grailsApplication.mainContext
 
 modules = {
     // This file should be named such that it comes alphabetically after any *Resources files that contain explicit
