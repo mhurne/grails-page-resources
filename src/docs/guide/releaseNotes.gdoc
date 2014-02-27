@@ -1,6 +1,9 @@
 Below is the history of Page Resource plugin releases.
 
-h4. 0.2.4 (Next release)
+h4. 0.2.5 (Next version)
+* Features TBD
+
+h4. 0.2.4 (Released 2-26-2014)
 * Remove use of ApplicationHolder ( "GitHub Issue #7":https://github.com/commercehub-oss/grails-page-resources/issues/7 )
 * Shifted hosting from BitBucket to GitHub
 * Added CI support, including automatic publishing of documentation and snapshot builds ( "GitHub Issue #9":https://github.com/commercehub-oss/grails-page-resources/issues/9 )

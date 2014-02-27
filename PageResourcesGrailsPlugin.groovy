@@ -23,7 +23,7 @@ import org.springframework.beans.factory.config.RuntimeBeanReference
 import org.springframework.core.io.FileSystemResource
 
 class PageResourcesGrailsPlugin {
-    def version = "0.2.4-SNAPSHOT"
+    def version = "0.2.4"
     def grailsVersion = "2.0 > *"
     def dependsOn = [resources: "1.2.6"]
     def loadAfter = ['webflow']
