@@ -1,7 +1,7 @@
 Below is the history of Page Resource plugin releases.
 
 h4. 0.2.4 (Next release)
-* Features TBD
+* Remove use of ApplicationHolder ( "GitHub Issue #7":https://github.com/commercehub-oss/grails-page-resources/issues/7 )
 * Shifted hosting from BitBucket to GitHub
 * Added CI support, including automatic publishing of documentation and snapshot builds ( "GitHub Issue #9":https://github.com/commercehub-oss/grails-page-resources/issues/9 )
 * Changed spring-webflow dependency from build to compile to avoid compilation errors in projects that don't use webflow
